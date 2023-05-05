@@ -8,8 +8,8 @@ module.exports = (api) => {
         "@babel/preset-env",
         {
           useBuiltIns: "entry",
-          corejs: "3.9",
-          targets: isNode ? { node: "12" } : { browsers: "last 2 versions" },
+          corejs: "3.30.1",
+          targets: isNode ? { node: "16" } : { browsers: "last 2 versions" },
         },
       ],
       "@babel/preset-typescript",
