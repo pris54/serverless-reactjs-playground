@@ -1,20 +1,24 @@
 import "./App.css";
 import * as React from "react";
+import { Route, Routes } from "react-router-dom";
 import useConfig from "./components/useConfig";
+import Header from "./components/Header";
+import Error from "./components/Error";
 
 /**
  * Our Web Application
  */
 export default function App() {
   const config = useConfig();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Welcome to {config.app.TITLE}</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit <code>src/App.tsx</code> and save to reload.
-      </p>
+      <Routes>
+        <Route path="/" element={<Header/>} />
+        <Route path="/test" element={<Header/>} />
+        <Route path="/error/:code" element={<Error/>} />
+        <Route path="*" element={<Header/>} />
+      </Routes>
     </div>
   );
 }
