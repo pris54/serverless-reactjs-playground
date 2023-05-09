@@ -8,7 +8,7 @@ import "./index.css";
  */
 import * as React from "react";
 import { hydrateRoot } from "react-dom/client";
-
+import { BrowserRouter } from "react-router-dom";
 import ConfigContext from "../components/ConfigContext";
 import { Config } from "../server/config";
 import App from "../App";
@@ -16,6 +16,7 @@ import App from "../App";
 const config = (window as any).__CONFIG__ as Config;
 delete (window as any).__CONFIG__;
 
+const basename = config.app.URL.match(/^(?:https?:\/\/)?[^\/]+(\/?.+)?$/i)?.[1];
 const container = document.getElementById("root");
 /** Components added here will _only_ be loaded in the web browser, never for server-side rendering */
 const render = () => {
@@ -24,7 +25,9 @@ const render = () => {
     container,
     <>
       <ConfigContext.Provider value={config}>
-        <App />
+        <BrowserRouter basename={basename}>
+          <App />
+        </BrowserRouter>
       </ConfigContext.Provider>
     </>
   );
